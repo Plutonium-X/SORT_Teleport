@@ -1,0 +1,10 @@
+IF
+   Global("RZAR2200","GLOBAL",0)
+THEN
+    RESPONSE #100
+             SetGlobal("RZAR2200","GLOBAL",1)
+             Continue()
+END
+
+
+
