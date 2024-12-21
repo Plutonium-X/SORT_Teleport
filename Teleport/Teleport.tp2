@@ -1,0 +1,392 @@
+BACKUP ~Teleport/backup~
+AUTHOR ~Razfallow~
+
+ALWAYS
+	ACTION_DEFINE_ARRAY RZ_reload BEGIN
+	"Setup"
+	END
+	ACTION_DEFINE_ARRAY RZ_noconvert BEGIN END 
+	LAF HANDLE_CHARSETS
+		INT_VAR
+		infer_charset = 1
+		STR_VAR
+		tra_path = EVAL ~%MOD_FOLDER%/languages~
+		noconvert_array = RZ_noconvert
+		reload_array = RZ_reload
+	END
+END
+
+LANGUAGE ~Cesky~
+         ~cesky~
+         ~Teleport/languages/czech/setup.tra~
+LANGUAGE ~English~
+         ~english~
+         ~Teleport/languages/english/setup.tra~
+LANGUAGE ~Russian (by www.aerie.ru)~
+         ~russian~
+         ~Teleport/languages/russian/setup.tra~
+LANGUAGE ~Italiano (by Ilot)~
+         ~italian~
+         ~Teleport/languages/italian/setup.tra~
+LANGUAGE ~Polski (by yarpen)~
+         ~polish~
+         ~Teleport/languages/polish/setup.tra~
+LANGUAGE ~Deutsche (by Drogan Di'Umptu)~
+         ~german~
+         ~Teleport/languages/german/setup.tra~
+LANGUAGE ~Spanish (by Ethelien and Memnoch, special thanks to Ancalagon)~
+         ~spanish~
+         ~Teleport/languages/spanish/setup.tra~
+LANGUAGE ~French (by Skipcool)~
+         ~french~
+         ~Teleport/languages/french/setup.tra~
+
+////////////////////
+//Teleport for SoA//
+////////////////////
+BEGIN @55
+
+ACTION_IF NOT FILE_EXISTS ~override/RZcut01.bcs~
+THEN BEGIN
+COPY ~Teleport/cutscene-soa~ ~override~
+END
+
+ACTION_IF NOT FILE_EXISTS ~override/RZtelep.bam~
+THEN BEGIN
+COPY ~Teleport/bam~ ~override~
+END
+
+ACTION_IF NOT FILE_EXISTS ~override/RZtelep.bcs~
+THEN BEGIN
+COPY ~Teleport/invisiblecre/RZtelep.bcs~ ~override/RZtelep.bcs~
+END
+
+ACTION_IF NOT FILE_EXISTS ~override/RZtelep.cre~
+THEN BEGIN
+COPY ~Teleport/invisiblecre/RZtelep.cre~ ~override/RZtelep.cre~
+      SAY NAME1 @1
+      SAY NAME2 @1
+END
+
+ACTION_IF NOT FILE_EXISTS ~override/RZtelep.dlg~
+THEN BEGIN
+COMPILE ~Teleport/invisiblecre/RZtelep-soa.d~
+USING   ~Teleport/%s/setup.tra~
+END ELSE BEGIN
+COMPILE ~Teleport/invisiblecre/RZtelep.d~
+USING   ~Teleport/%s/setup.tra~
+END
+
+ACTION_IF NOT FILE_EXISTS ~override/RZtelep.eff~
+THEN BEGIN
+COPY ~Teleport/spl/RZtelep.eff~ ~override/RZtelep.eff~
+END
+
+/*
+ACTION_IF NOT FILE_EXISTS ~override/RZtelep.itm~
+THEN BEGIN
+COPY ~Teleport/spl/RZtelep.itm~ ~override/RZtelep.itm~
+      SAY NAME2 @1
+      SAY DESC  @2
+END
+
+ACTION_IF NOT FILE_EXISTS ~override/Spwi730.spl~
+THEN BEGIN
+COPY ~Teleport/spl/Spwi730.spl~ ~override/Spwi730.spl~
+      SAY NAME1 @1
+      SAY UNIDENTIFIED_DESC @2
+END*/
+
+DEFINE_PATCH_FUNCTION cd_scroll
+  INT_VAR
+    unusable0  = 0
+    unusable1  = 0
+    unusable2  = 0
+    target_hdr = 5
+    range      = 30
+    opcode     = 146
+    target_eff = 2
+    price = 54321
+  STR_VAR 
+    spell = cdnull
+  BEGIN
+
+  WRITE_LONG  0x1e (THIS | unusable0) // class/alignment flags
+  WRITE_BYTE  0x2d (THIS | unusable1) // add first set of unusable flags
+  WRITE_BYTE  0x2f (THIS | unusable2) // add second set of unusable flags
+  WRITE_LONG  0x34 price              // price of scroll
+  WRITE_BYTE  0x7e target_hdr         // target: target
+  WRITE_SHORT 0x80 range              // range
+
+  WRITE_ASCIIE 0x3a "%DEST_RES%"
+  WRITE_ASCII  0x41 a #1
+  WRITE_ASCIIE 0x76 "%DEST_RES%"
+  WRITE_ASCII  0x7d a #1
+  PATCH_IF (SOURCE_SIZE > 0xda) BEGIN // only for arcane scrolls that have second header for learning
+    WRITE_SHORT  0xe2 opcode          // cast-at-point opcode
+    WRITE_BYTE   0xe4 target_eff      // target: target
+    WRITE_ASCIIE 0xae "%DEST_RES%"
+    WRITE_ASCII  0xb5 a #1
+    WRITE_ASCIIE 0xf6 "%spell%" #8
+    WRITE_ASCIIE 0x126 "%spell%" #8
+  END
+END
+
+ADD_SPELL ~Teleport/spl/rztelep.spl~	2 7 WIZARD_TELEPORT_WITHOUT_ERROR	SPRINT current_spell_res "%DEST_RES%"	SAY NAME1 @1	SAY UNIDENTIFIED_DESC @2
+COPY	~Teleport/spl/parcho.itm~	~override/rztelep.itm~	SAY NAME2 @1	SAY DESC @2	LPF cd_scroll INT_VAR unusable2 = BIT6 price = 300 STR_VAR spell = EVAL ~%current_spell_res%~ END
+
+
+COPY_EXISTING ~scrolls.sto~	~override~
+			~uddrow25.sto~	~override~	ADD_STORE_ITEM ~RZTELEP~ LAST #1 #1 #1 ~IDENTIFIED~ #1
+
+//APPEND ~Spell.ids~ ~2730 WIZARD_TELEPORT~ UNLESS ~2730 WIZARD_TELEPORT~
+
+COPY_EXISTING ~AR0302.are~ ~override~
+              ~AR0305.are~ ~override~
+              ~AR0306.are~ ~override~
+              ~AR0412.are~ ~override~
+              ~AR0509.are~ ~override~
+              ~AR1005.are~ ~override~
+              ~AR1010.are~ ~override~
+              ~AR1201.are~ ~override~
+              ~AR1203.are~ ~override~
+              ~AR3003.are~ ~override~
+              ~AR5501.are~ ~override~
+              ~AR5502.are~ ~override~
+  PATCH_IF (SOURCE_SIZE > 0x11b) THEN BEGIN // protects against invalid files
+    READ_ASCII 0x94 "script"
+    PATCH_IF (("" STRING_COMPARE_CASE "%script%" = 0) OR ("None" STRING_COMPARE_CASE "%script%" = 0)) BEGIN
+      WRITE_EVALUATED_ASCII 0x94 ~%SOURCE_RES%~
+    END
+  END
+  BUT_ONLY_IF_IT_CHANGES
+
+EXTEND_TOP ~AR0020.bcs~  ~Teleport/area-baf/AR0020.baf~
+EXTEND_TOP ~AR0202.bcs~  ~Teleport/area-baf/AR0202.baf~
+EXTEND_TOP ~AR0203.bcs~  ~Teleport/area-baf/AR0203.baf~
+EXTEND_TOP ~AR0204.bcs~  ~Teleport/area-baf/AR0204.baf~
+EXTEND_TOP ~AR0205.bcs~  ~Teleport/area-baf/AR0205.baf~
+EXTEND_TOP ~AR0300.bcs~  ~Teleport/area-baf/AR0300.baf~
+EXTEND_TOP ~AR0307.bcs~  ~Teleport/area-baf/AR0307.baf~
+EXTEND_TOP ~AR0308.bcs~  ~Teleport/area-baf/AR0308.baf~
+EXTEND_TOP ~AR0311.bcs~  ~Teleport/area-baf/AR0311.baf~
+EXTEND_TOP ~AR0313.bcs~  ~Teleport/area-baf/AR0313.baf~
+EXTEND_TOP ~AR0328.bcs~  ~Teleport/area-baf/AR0328.baf~
+EXTEND_TOP ~AR0329.bcs~  ~Teleport/area-baf/AR0329.baf~
+EXTEND_TOP ~AR0205.bcs~  ~Teleport/area-baf/AR0205.baf~
+EXTEND_TOP ~AR0334.bcs~  ~Teleport/area-baf/AR0334.baf~
+EXTEND_TOP ~AR0400.bcs~  ~Teleport/area-baf/AR0400.baf~
+EXTEND_TOP ~AR0402.bcs~  ~Teleport/area-baf/AR0402.baf~
+EXTEND_TOP ~AR0404.bcs~  ~Teleport/area-baf/AR0404.baf~
+EXTEND_TOP ~AR0405.bcs~  ~Teleport/area-baf/AR0405.baf~
+EXTEND_TOP ~AR0406.bcs~  ~Teleport/area-baf/AR0406.baf~
+EXTEND_TOP ~AR0410.bcs~  ~Teleport/area-baf/AR0410.baf~
+EXTEND_TOP ~AR0411.bcs~  ~Teleport/area-baf/AR0411.baf~
+EXTEND_TOP ~AR0413.bcs~  ~Teleport/area-baf/AR0413.baf~
+EXTEND_TOP ~AR0500.bcs~  ~Teleport/area-baf/AR0500.baf~
+EXTEND_TOP ~AR0510.bcs~  ~Teleport/area-baf/AR0510.baf~
+EXTEND_TOP ~AR0512.bcs~  ~Teleport/area-baf/AR0512.baf~
+EXTEND_TOP ~AR0607.bcs~  ~Teleport/area-baf/AR0607.baf~
+EXTEND_TOP ~AR0700.bcs~  ~Teleport/area-baf/AR0700.baf~
+EXTEND_TOP ~AR0701.bcs~  ~Teleport/area-baf/AR0701.baf~
+EXTEND_TOP ~AR0702.bcs~  ~Teleport/area-baf/AR0702.baf~
+EXTEND_TOP ~AR0334.bcs~  ~Teleport/area-baf/AR0334.baf~
+EXTEND_TOP ~AR0704.bcs~  ~Teleport/area-baf/AR0704.baf~
+EXTEND_TOP ~AR0705.bcs~  ~Teleport/area-baf/AR0705.baf~
+EXTEND_TOP ~AR0709.bcs~  ~Teleport/area-baf/AR0709.baf~
+EXTEND_TOP ~AR0800.bcs~  ~Teleport/area-baf/AR0800.baf~
+EXTEND_TOP ~AR0801.bcs~  ~Teleport/area-baf/AR0801.baf~
+EXTEND_TOP ~AR0803.bcs~  ~Teleport/area-baf/AR0803.baf~
+EXTEND_TOP ~AR0900.bcs~  ~Teleport/area-baf/AR0900.baf~
+EXTEND_TOP ~AR0901.bcs~  ~Teleport/area-baf/AR0901.baf~
+EXTEND_TOP ~AR0902.bcs~  ~Teleport/area-baf/AR0902.baf~
+EXTEND_TOP ~AR0903.bcs~  ~Teleport/area-baf/AR0903.baf~
+EXTEND_TOP ~AR0904.bcs~  ~Teleport/area-baf/AR0904.baf~
+EXTEND_TOP ~AR1000.bcs~  ~Teleport/area-baf/AR1000.baf~
+EXTEND_TOP ~AR1002.bcs~  ~Teleport/area-baf/AR1002.baf~
+EXTEND_TOP ~AR1003.bcs~  ~Teleport/area-baf/AR1003.baf~
+EXTEND_TOP ~AR1006.bcs~  ~Teleport/area-baf/AR1006.baf~
+EXTEND_TOP ~AR1100.bcs~  ~Teleport/area-baf/AR1100.baf~
+EXTEND_TOP ~AR1102.bcs~  ~Teleport/area-baf/AR1102.baf~
+EXTEND_TOP ~AR1104.bcs~  ~Teleport/area-baf/AR1104.baf~
+EXTEND_TOP ~AR1105.bcs~  ~Teleport/area-baf/AR1105.baf~
+EXTEND_TOP ~AR1200.bcs~  ~Teleport/area-baf/AR1200.baf~
+EXTEND_TOP ~AR1202.bcs~  ~Teleport/area-baf/AR1202.baf~
+EXTEND_TOP ~AR1204.bcs~  ~Teleport/area-baf/AR1204.baf~
+EXTEND_TOP ~AR1300.bcs~  ~Teleport/area-baf/AR1300.baf~
+EXTEND_TOP ~AR1302.bcs~  ~Teleport/area-baf/AR1302.baf~
+EXTEND_TOP ~AR1303.bcs~  ~Teleport/area-baf/AR1303.baf~
+EXTEND_TOP ~AR1401.bcs~  ~Teleport/area-baf/AR1401.baf~
+EXTEND_TOP ~AR1402.bcs~  ~Teleport/area-baf/AR1402.baf~
+EXTEND_TOP ~AR1404.bcs~  ~Teleport/area-baf/AR1404.baf~
+EXTEND_TOP ~AR1600.bcs~  ~Teleport/area-baf/AR1600.baf~
+EXTEND_TOP ~AR1602.bcs~  ~Teleport/area-baf/AR1602.baf~
+EXTEND_TOP ~AR1611.bcs~  ~Teleport/area-baf/AR1611.baf~
+EXTEND_TOP ~AR1700.bcs~  ~Teleport/area-baf/AR1700.baf~
+EXTEND_TOP ~AR1800.bcs~  ~Teleport/area-baf/AR1800.baf~
+EXTEND_TOP ~AR1900.bcs~  ~Teleport/area-baf/AR1900.baf~
+EXTEND_TOP ~AR1901.bcs~  ~Teleport/area-baf/AR1901.baf~
+EXTEND_TOP ~AR2000.bcs~  ~Teleport/area-baf/AR2000.baf~
+EXTEND_TOP ~AR2002.bcs~  ~Teleport/area-baf/AR2002.baf~
+EXTEND_TOP ~AR2007.bcs~  ~Teleport/area-baf/AR2007.baf~
+EXTEND_TOP ~AR2008.bcs~  ~Teleport/area-baf/AR2008.baf~
+EXTEND_TOP ~AR2010.bcs~  ~Teleport/area-baf/AR2010.baf~
+EXTEND_TOP ~AR2100.bcs~  ~Teleport/area-baf/AR2100.baf~
+EXTEND_TOP ~AR2200.bcs~  ~Teleport/area-baf/AR2200.baf~
+EXTEND_TOP ~AR2201.bcs~  ~Teleport/area-baf/AR2201.baf~
+EXTEND_TOP ~AR2202.bcs~  ~Teleport/area-baf/AR2202.baf~
+EXTEND_TOP ~AR2300.bcs~  ~Teleport/area-baf/AR2300.baf~
+EXTEND_TOP ~AR2400.bcs~  ~Teleport/area-baf/AR2400.baf~
+EXTEND_TOP ~AR2402.bcs~  ~Teleport/area-baf/AR2402.baf~
+EXTEND_TOP ~AR2500.bcs~  ~Teleport/area-baf/AR2500.baf~
+EXTEND_TOP ~AR2600.bcs~  ~Teleport/area-baf/AR2600.baf~
+EXTEND_TOP ~AR2800.bcs~  ~Teleport/area-baf/AR2800.baf~
+EXTEND_TOP ~AR2801.bcs~  ~Teleport/area-baf/AR2801.baf~
+EXTEND_TOP ~AR2802.bcs~  ~Teleport/area-baf/AR2802.baf~
+EXTEND_TOP ~AR0001.bcs~  ~Teleport/area-baf/AR0001.baf~
+EXTEND_TOP ~AR0003.bcs~  ~Teleport/area-baf/AR0003.baf~
+EXTEND_TOP ~AR0004.bcs~  ~Teleport/area-baf/AR0004.baf~
+EXTEND_TOP ~AR0021.bcs~  ~Teleport/area-baf/AR0004.baf~
+EXTEND_TOP ~AR0609.bcs~  ~Teleport/area-baf/AR0609.baf~
+EXTEND_TOP ~AR0302.bcs~  ~Teleport/area-baf/AR0302.baf~
+EXTEND_TOP ~AR0305.bcs~  ~Teleport/area-baf/AR0305.baf~
+EXTEND_TOP ~AR0306.bcs~  ~Teleport/area-baf/AR0306.baf~
+EXTEND_TOP ~AR0319.bcs~  ~Teleport/area-baf/AR0319.baf~
+EXTEND_TOP ~AR0408.bcs~  ~Teleport/area-baf/AR0408.baf~
+EXTEND_TOP ~AR0412.bcs~  ~Teleport/area-baf/AR0412.baf~
+EXTEND_TOP ~AR0509.bcs~  ~Teleport/area-baf/AR0509.baf~
+EXTEND_TOP ~AR0513.bcs~  ~Teleport/area-baf/AR0513.baf~
+EXTEND_TOP ~AR0703.bcs~  ~Teleport/area-baf/AR0703.baf~
+EXTEND_TOP ~AR0706.bcs~  ~Teleport/area-baf/AR0706.baf~
+EXTEND_TOP ~AR1005.bcs~  ~Teleport/area-baf/AR1005.baf~
+EXTEND_TOP ~AR1010.bcs~  ~Teleport/area-baf/AR1010.baf~
+EXTEND_TOP ~AR1201.bcs~  ~Teleport/area-baf/AR1201.baf~
+EXTEND_TOP ~AR1203.bcs~  ~Teleport/area-baf/AR1203.baf~
+EXTEND_TOP ~AR2101.bcs~  ~Teleport/area-baf/AR2101.baf~
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR0707.bcs~ THEN BEGIN
+  EXTEND_TOP ~AR0707.bcs~  ~Teleport/area-baf/AR0003.baf~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR1604.bcs~ THEN BEGIN
+  EXTEND_TOP ~AR1604.bcs~  ~Teleport/area-baf/AR0609.baf~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR1603.bcs~ THEN BEGIN
+  EXTEND_TOP ~AR1603.bcs~  ~Teleport/area-baf/AR0001.baf~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR2001.bcs~ THEN BEGIN
+  EXTEND_TOP ~AR2001.bcs~  ~Teleport/area-baf/AR0001.baf~
+END
+
+////////////////////
+//Teleport for ToB//
+////////////////////
+
+BEGIN @56
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~Mel01.cre~ THEN BEGIN
+  PRINT @57
+END ELSE BEGIN
+
+ACTION_IF NOT FILE_EXISTS ~override/RZcut112.bcs~
+THEN BEGIN
+COPY ~Teleport/cutscene-tob~ ~override~
+END
+
+ACTION_IF NOT FILE_EXISTS ~override/Spwi730a.bam~
+THEN BEGIN
+COPY ~Teleport/bam~ ~override~
+END
+
+ACTION_IF NOT FILE_EXISTS ~override/RZtelep.bcs~
+THEN BEGIN
+COPY ~Teleport/invisiblecre/RZtelep.bcs~ ~override/RZtelep.bcs~
+END
+
+ACTION_IF NOT FILE_EXISTS ~override/RZtelep.cre~
+THEN BEGIN
+COPY ~Teleport/invisiblecre/RZtelep.cre~ ~override/RZtelep.cre~
+      SAY NAME1 @1
+      SAY NAME2 @1
+END
+
+ACTION_IF NOT FILE_EXISTS ~override/RZtelep.dlg~
+THEN BEGIN
+COMPILE ~Teleport/invisiblecre/RZtelep-tob.d~
+USING   ~Teleport/%s/setup.tra~
+END ELSE BEGIN
+COMPILE ~Teleport/invisiblecre/RZtelep.d~
+USING   ~Teleport/%s/setup.tra~
+END
+
+ACTION_IF NOT FILE_EXISTS ~override/RZtelep.eff~
+THEN BEGIN
+COPY ~Teleport/spl/RZtelep.eff~ ~override/RZtelep.eff~
+END
+
+ACTION_IF NOT FILE_EXISTS ~override/RZtelep.itm~
+THEN BEGIN
+COPY ~Teleport/spl/RZtelep.itm~ ~override/RZtelep.itm~
+      SAY NAME2 @1
+      SAY DESC  @2
+END
+
+ACTION_IF NOT FILE_EXISTS ~override/Spwi730.spl~
+THEN BEGIN
+COPY ~Teleport/spl/Spwi730.spl~ ~override/Spwi730.spl~
+      SAY NAME1 @1
+      SAY UNIDENTIFIED_DESC @2
+END
+
+COPY_EXISTING	~25spell.sto~ ~override~
+				~25spell2.sto~ ~override~
+				~garlena.sto~ ~override~	ADD_STORE_ITEM ~RZTELEP~  LAST #1 #1 #1 ~IDENTIFIED~ #1
+
+APPEND ~Spell.ids~ ~2730 WIZARD_TELEPORT~ UNLESS ~2730 WIZARD_TELEPORT~
+
+EXTEND_TOP ~AR3000.bcs~  ~Teleport/area-baf/AR3000.baf~
+EXTEND_TOP ~AR3001.bcs~  ~Teleport/area-baf/AR3001.baf~
+EXTEND_TOP ~AR3015.bcs~  ~Teleport/area-baf/AR3015.baf~
+EXTEND_TOP ~AR3016.bcs~  ~Teleport/area-baf/AR3016.baf~
+EXTEND_TOP ~AR3017.bcs~  ~Teleport/area-baf/AR3017.baf~
+EXTEND_TOP ~AR3019.bcs~  ~Teleport/area-baf/AR3019.baf~
+EXTEND_TOP ~AR3020.bcs~  ~Teleport/area-baf/AR3020.baf~
+EXTEND_TOP ~AR5200.bcs~  ~Teleport/area-baf/AR5200.baf~
+EXTEND_TOP ~AR5201.bcs~  ~Teleport/area-baf/AR5201.baf~
+EXTEND_TOP ~AR5202.bcs~  ~Teleport/area-baf/AR5202.baf~
+EXTEND_TOP ~AR5203.bcs~  ~Teleport/area-baf/AR5203.baf~
+EXTEND_TOP ~AR0204.bcs~  ~Teleport/area-baf/AR0204.baf~
+EXTEND_TOP ~AR5500.bcs~  ~Teleport/area-baf/AR5500.baf~
+EXTEND_TOP ~AR5504.bcs~  ~Teleport/area-baf/AR5504.baf~
+EXTEND_TOP ~AR5509.bcs~  ~Teleport/area-baf/AR5509.baf~
+EXTEND_TOP ~AR6000.bcs~  ~Teleport/area-baf/AR6000.baf~
+EXTEND_TOP ~AR6003.bcs~  ~Teleport/area-baf/AR6003.baf~
+EXTEND_TOP ~AR6004.bcs~  ~Teleport/area-baf/AR6004.baf~
+EXTEND_TOP ~AR6005.bcs~  ~Teleport/area-baf/AR6005.baf~
+EXTEND_TOP ~AR6100.bcs~  ~Teleport/area-baf/AR6100.baf~
+EXTEND_TOP ~AR6101.bcs~  ~Teleport/area-baf/AR6101.baf~
+EXTEND_TOP ~AR6104.bcs~  ~Teleport/area-baf/AR6104.baf~
+EXTEND_TOP ~AR6106.bcs~  ~Teleport/area-baf/AR6106.baf~
+EXTEND_TOP ~AR6108.bcs~  ~Teleport/area-baf/AR6108.baf~
+EXTEND_TOP ~AR6400.bcs~  ~Teleport/area-baf/AR6400.baf~
+EXTEND_TOP ~AR3003.bcs~  ~Teleport/area-baf/AR3003.baf~
+EXTEND_TOP ~AR5204.bcs~  ~Teleport/area-baf/AR5204.baf~
+EXTEND_TOP ~AR5501.bcs~  ~Teleport/area-baf/AR5501.baf~
+EXTEND_TOP ~AR5502.bcs~  ~Teleport/area-baf/AR5502.baf~
+EXTEND_TOP ~AR6300.bcs~  ~Teleport/area-baf/AR6300.baf~
+END
+
+BEGIN  @54
+EXTEND_BOTTOM ~AERIE.BCS~ ~Teleport/change/aerie.baf~
+EXTEND_BOTTOM ~ANOMEN.BCS~ ~Teleport/change/anomen.baf~
+EXTEND_BOTTOM ~BALDUR.BCS~ ~Teleport/change/baldur.baf~
+EXTEND_BOTTOM ~CERND.BCS~ ~Teleport/change/cernd.baf~
+EXTEND_BOTTOM ~EDWIN.BCS~ ~Teleport/change/edwin.baf~
+EXTEND_BOTTOM ~JAHEIRA.BCS~ ~Teleport/change/jaheira.baf~
+EXTEND_BOTTOM ~JAN.BCS~ ~Teleport/change/jjansen.baf~
+EXTEND_BOTTOM ~MAZZY.BCS~ ~Teleport/change/mazzy.baf~
+EXTEND_BOTTOM ~NALIA.BCS~ ~Teleport/change/nalia.baf~
+
+COMPILE ~Teleport/change/cernd.d~
