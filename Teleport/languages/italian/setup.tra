@@ -1,0 +1,66 @@
+@1 = ~Teletrasporto~
+@2 = ~Teletrasporto (Alterazione)
+Livello: 7
+Raggio d'azione: 0
+Durata: Istantanea
+Tempo di lancio: 9
+Area d'Effetto: Il tuo Gruppo
+Tiro Salvezza: Nessuno
+
+Con questo potente incantesimo il mago può teletrasportare sè stesso e il suo intero gruppo nei luoghi precedentemente visitati. Ci sono alcune aree, per lo più extraplanari, dove non è permesso il teletrasporto.~
+
+@3    = ~Scegli l'area di destinazione~
+@4    = ~Maniero De´Arnise~
+@5    = ~Prossime aree~
+@6    = ~Da nessuna parte~
+@7    = ~La Città Sahuagin~
+@8    = ~Ritorno~
+@9    = ~Le Fogne sotto i Bassifondi~
+@10   = ~Entata Principale della Sfera Planare~
+@11   = ~La Stanza del Navigatore~
+@12   = ~La Stanza del Fuoco e del Ghiaccio~
+@13   = ~La Stanza del Motore~
+@14   = ~Il Quartiere del Cimitero~
+@15   = ~La Tana di Bodhi~
+@16   = ~La Rocca degli Arpisti~
+@17   = ~L'entrata del quartier generale dei Ladri Tenebrosi~
+@18   = ~Teatro~
+@19   = ~Il Nobilissimo Ordine del Cuore Radioso ~
+@20   = ~Il Nascondiglio di Mekrath~
+@21   = ~La tana del culto dell'Occhio Offuscato~
+@22   = ~Il nascondiglio dell'Occhio Offuscato~
+@23   = ~La Città Dimenticata~
+@24   = ~Tempio del Dio Dimenticato~
+@25   = ~Cortile del Maniero de'Arnise~
+@26   = ~Primo piano del Maniero de´Arnise ~
+@27   = ~Secondo piano del Maniero de´Arnise~
+@28   = ~Capanna di Merella~
+@29   = ~Tempio di Amaunator~
+@30   = ~Nascondiglio del Drago D'Ombra~
+@31   = ~Casa di Garren nelle colline di Windspear~
+@32   = ~Dungeon di Firkraag~
+@33   = ~Entrata del dungeon di Firkraag~
+@34   = ~Nascondiglio di Firkraag~
+@35   = ~Bosco del Druido~
+@36   = ~Bordello~
+@37   = ~Kuo-toa~
+@38   = ~Mind Flayer~
+@39   = ~Beholder~
+@40   = ~Ust Natha~
+@41   = ~Tempio di Lolth~
+@42   = ~Casa delle Somme sacerdotesse~
+@43   = ~Il Piano Elementale~
+@44   = ~L'inizio del labirinto~
+@45   = ~La fine del labirinto~
+@46   = ~Quinto Piano della Fortezza dell'Osservatore~
+@47   = ~Il secondo piano del covo di Yaga-Shura~
+@48   = ~Laboratorio nel covo di Abazigal~
+@49   = ~Entrata nell'Enclave di Sendai~
+@50   = ~Crocevia~
+@51   = ~Santuario interno di Sendai~
+@52   = ~Puoi teletrasportarti da questa area.~
+@53   = ~Qualcosa sta disturbando il tuo tentativo di teletrasporto da questa area.~
+@54   = ~Modifica NPC e roccaforti~
+@55  = ~Pergamena di Teletrasporto per BG2:SoA~
+@56  = ~Pergamena di Teletrasporto per BG2:ToB~
+@57  = ~Questo componente richiede ToB. Poiché non hai ToB installato, questo componente non verrà installato.~

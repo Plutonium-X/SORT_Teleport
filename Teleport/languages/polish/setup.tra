@@ -1,0 +1,66 @@
+@1 = ~Teleportacja~
+@2 = ~Teleportacja (Przemiany)
+Poziom: 7
+Zasiêg: specjalny
+Czas dzia³ania: natychmiastowy
+Czas rzucania: 9
+Obszar dzia³ania: ca³a dru¿yna
+Rzut obronny: brak
+
+To potê¿ne zaklêcie powoduje, ¿e rzucaj¹cy i jego dru¿yna natychmiast teleportuj¹ siê do dowolnego przez siebie wybranego miejsca. Jednak musz¹ byæ to obszary, które ju¿ zwiedzili, i mo¿na nawi¹zaæ z nimi siln¹ wiêŸ teleportacyjn¹. S¹ te¿ miejsca, zarówno z których, jak i do których, teleportacja jest niemo¿liwa.~
+
+@3    = ~Wybierz cel:~
+@4    = ~Twierdza De'arniese~
+@5    = ~Nastêpne obszary~
+@6    = ~Nigdzie~
+@7    = ~Miasto Sahuaginów~
+@8    = ~Spowrotem~
+@9    = ~Kana³y pod slumsami~
+@10   = ~Wejœcie~
+@11   = ~Komnata nawigatora~
+@12   = ~Komnaty lodu i ognia~
+@13   = ~Silnik~
+@14   = ~Cmentarne podziemia~
+@15   = ~Jaskinia Bodhi~
+@16   = ~Kryjówka Harfiarzy~
+@17   = ~Wejœcie do domu gildii Z³odzieji Cienia~
+@18   = ~Dom rozrywek~
+@19   = ~Zakon Promiennego Serca~
+@20   = ~Kryjówka Mekratha~
+@21   = ~Jaskinia kultu Niewidz¹cego Oka~
+@22   = ~Kryjówka Niewidz¹cego Oka~
+@23   = ~Zapomniane miasto~
+@24   = ~Œwi¹tynia Zapomnianego Boga~
+@25   = ~Dziedziniec twierdzy De'arniese~
+@26   = ~Pierwsze piêtro twierdzy De'arniese~
+@27   = ~Drugie piêtro twierdzy De'arniese~
+@28   = ~Dom ³owcy~
+@29   = ~Œwi¹tynia Amanuatora~
+@30   = ~Legowisko Smoka Cieni~
+@31   = ~Dom Garrena Wichrowej W³óczni~
+@32   = ~Lochy Firkraga~
+@33   = ~Wejœcie do lochu Firkraga~
+@34   = ~Jaskinia Firkraga~
+@35   = ~Gaj druidów~
+@36   = ~Burdel~
+@37   = ~Legowisko Kuo-Toa~
+@38   = ~Kryjówka £upie¿ców Umys³u~
+@39   = ~Jaskinie Obserwatorów~
+@40   = ~Ust Natha~
+@41   = ~Œwi¹tynia Lolth~
+@42   = ~Dom wy¿szej kap³anki~
+@43   = ~Pokój ¿ywio³ów~
+@44   = ~Pocz¹tek wiêzienia~
+@45   = ~Koniec wiêzienia~
+@46   = ~Przedostatnie piêtro~
+@47   = ~Drugi poziom jaskini Yaga-Shury~
+@48   = ~Pracownia Lycantha~
+@49   = ~Wejœcie do enklawy Sendai~
+@50   = ~Skrzy¿owanie~
+@51   = ~Wewnêtrzne sanktuarium Sendai~
+@52   = ~Nie mo¿esz siê teleportowaæ z tego miejsca.~
+@53   = ~Coœ niweczy twoje próby teleportacji do tego miejsca.~
+@54   = ~Poprawki dla NPC'ow i Twierdz.~
+@55  = ~Zaklecie Teleportacji dla BG II: Cienie Amn~
+@56  = ~Zaklecie Teleportacji dla BG II: Tronu Bhalla~
+@57  = ~Nie wykryto Tronu Bhalla. Pomijam ten komponent.~

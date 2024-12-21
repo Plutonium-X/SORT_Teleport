@@ -1,0 +1,66 @@
+@1 = ~Teleport~
+@2 = ~Teleport (Promìny)
+Úroveò: 7
+Dosah: 0
+Trvání: ihned
+Doba sesílání: 9
+Oblast pùsobení: Sesilatel
+Záchranný hod: Žádný
+
+Toto mocné kouzlo umožòuje sesílateli teleportovat sebe a družinu do oblasti, kterou kdysi navštívili. Existuje nìkolik výjimek, kde se nedá teleportovat, vìtšinou to bývají oblasti v jiných sférách.~
+
+@3    = ~Vyber cílové místo~
+@4    = ~Pevnost de´Arnise~
+@5    = ~Další oblasti~
+@6    = ~Nikam nechci~
+@7    = ~Sahuaginské mìsto~
+@8    = ~Zpìt~
+@9    = ~Stoky pod Chudinskou ètvrtí~
+@10   = ~Vstupní patro~
+@11   = ~Navigaèní místnost~
+@12   = ~Místnost ledu a ohnì~
+@13   = ~Strojovna~
+@14   = ~Podzemí høbitova~
+@15   = ~Bodhiino doupì~
+@16   = ~Budova Harfeníkù~
+@17   = ~Vstupní místnost gildy Stínových zlodìjù~
+@18   = ~Divadlo~
+@19   = ~Øád Záøícího Srdce~
+@20   = ~Mekrathovo obydlí~
+@21   = ~Sídlo kultu Nevidoucího oka~
+@22   = ~Doupì Nevidoucího oka~
+@23   = ~Zapomenuté mìsto~
+@24   = ~Chrám zapomenutého boha~
+@25   = ~Nádvoøí pevnosti de´Arnise~
+@26   = ~První patro pevnosti de´Arnise~
+@27   = ~Druhé patro pevnosti de´Arnise~
+@28   = ~Hranièáøùv srub~
+@29   = ~Amaunatorùv chrám~
+@30   = ~Doupì stínového draka~
+@31   = ~Dùm Garenna Windspeara~
+@32   = ~Firkaagùv dungeon~
+@33   = ~Vstup do Firkaagova dungeonu~
+@34   = ~Firkraagovo doupì~
+@35   = ~Druidská svatynì~
+@36   = ~Nevìstinec~
+@37   = ~Doupì kua-toanù~
+@38   = ~Doupì mozkožroutù~
+@39   = ~Doupì beholderù~
+@40   = ~Ust Natha~
+@41   = ~Chrám Loth~
+@42   = ~Dùm knìžky~
+@43   = ~Elementální patro~
+@44   = ~Zaèátek bludištì~
+@45   = ~Konec bludištì~
+@46   = ~Pøedposlední patro~
+@47   = ~Druhé patro Yaga-Shurova doupìte~
+@48   = ~Lycanthova laboratoø~
+@49   = ~Vstupní oblast Sendaiiny enklávy~
+@50   = ~Køižovatka~
+@51   = ~Sendaina svatynì~
+@52   = ~Z této oblasti se nemùžeš teleportovat.~
+@53   = ~Nìco ti brání v teleportaci.~
+@54   = ~Uprava NPC a stronghold questu.~
+@55  = ~Teleportacni kouzlo pro BG2:SoA~
+@56  = ~Teleportacni kouzlo pro BG2:ToB~
+@57  = ~Tato soucast modu vyzaduje datadisk ToB. Zda se, ze ho nemas nainstalovan, nebudu tedy instalovat tutu cast modu.~

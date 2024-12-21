@@ -1,0 +1,66 @@
+@1 = ~Teleportar sin error~
+@2 = ~Teleportar sin error (Alteración)
+Nivel: 7
+Alcance: 0
+Duración: Instantánea
+Tiempo de lanzamiento: 9
+Área de efecto: Grupo
+Tirada de salvación: Ninguna
+
+Este poderoso conjuro permite teletransportar al lanzador y a todo su grupo a zonas que hayan visitado anteriormente. Algunas áreas, la mayoría extraplanares, anulan los efectos de este sortilegio.~
+
+@3    = ~Seleccionad un destino~
+@4    = ~Castillo D´Arnise~
+@5    = ~Más áreas~
+@6    = ~No quiero ir a ninguna parte~
+@7    = ~Ciudad Sajuaguín~
+@8    = ~Atrás~
+@9    = ~Alcantarillas de los Barrios Bajos~
+@10   = ~Nivel de entrada~
+@11   = ~Sala del navegante~
+@12   = ~Sala de fuego y hielo~
+@13   = ~Sala de máquinas~
+@14   = ~Catacumbas del cementerio~
+@15   = ~Guarida de Bodhi~
+@16   = ~Cuartel de los Arpistas~
+@17   = ~Entrada de la cofradía de los Ladrones de las Sombras~
+@18   = ~Teatro~
+@19   = ~Noble Orden del Muy Radiante Corazón ~
+@20   = ~Santuario de Mekrath~
+@21   = ~Base del culto al Ojo que no ve~
+@22   = ~Madriguera del Ojo que no ve~
+@23   = ~Ciudad Perdida~
+@24   = ~Templo del Dios Olvidado~
+@25   = ~Patio del castillo D´Arnise~
+@26   = ~Planta baja del castillo D´Arnise~
+@27   = ~Primera planta del castillo D´Arnise~
+@28   = ~Cabaña del explorador~
+@29   = ~Templo de Amaunator~
+@30   = ~Guarida del dragón de las sombras~
+@31   = ~Hogar de Garren Ventolanza~
+@32   = ~Mazmorra de Firkraag~
+@33   = ~Entrada de la mazmorra de Firkraag~
+@34   = ~Guarida de Firkraag~
+@35   = ~Arboleda druídica~
+@36   = ~Prostíbulo~
+@37   = ~Kuo-toa~
+@38   = ~Azotamentes~
+@39   = ~Contempladores~
+@40   = ~Ust Natha~
+@41   = ~Templo de Lolth~
+@42   = ~Hogar de la Suma Sacerdotisa~
+@43   = ~Nivel de los Elementos~
+@44   = ~Entrada del laberinto~
+@45   = ~Salida del laberinto~
+@46   = ~Penúltimo piso~
+@47   = ~Primer piso de la guarida de Yaga-Shura~
+@48   = ~Laboratorio de Iycanzh el Loco~
+@49   = ~Entrada del enclave de Sendái~
+@50   = ~Bifurcaciones~
+@51   = ~Sanctasanctórum de Sendái~
+@52   = ~No podéis teletransportaros a esa zona.~
+@53   = ~Un poder desconocido impide que podáis teletransportaros desde esta zona.~
+@54   = ~Modificación de las misiones de PNJ y fortalezas.~
+@55  = ~Conjuro de teletransporte para BG2: SoA~
+@56  = ~Conjuro de teletransporte para BG2: ToB~
+@57  = ~Este componente requiere la expansion Throne of Bhaal. Parece que no la tienes, asi que no lo instalare.~

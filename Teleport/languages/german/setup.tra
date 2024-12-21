@@ -1,0 +1,68 @@
+@1  = ~Teleportation~ 
+@2  = ~Teleportation (Veränderung)
+Grad: 7
+Reichweite: 0 
+Wirkungsdauer: Augenblicklich
+Zeitaufwand: 9
+Wirkungsbereich: Gruppe
+Rettungswurf: Nein
+
+Mit dieser machtvollen Schriftrolle, kann der Zaubernde sich und seine
+ganze gruppe an Plätze welche Sie bereits besucht haben Teleportieren.
+Es gibt viele Gebiete, meistens ausserhalb den Planaren Ebenen, von 
+welchen es Euch nicht erlaubt ist zu Teleportieren.~
+@3  = ~Wählt das Zielgebiet~ 
+@4  = ~Burg de'Arnise~
+@5  = ~Nächstes Gebiet~ 
+@6  = ~Nirgendwohin~
+@7  = ~tadt der Sahuagin ~
+@8  = ~Zurück~ 
+@9  = ~Kanalisation unter den Slums~
+@10 = ~Eingangsgeschoss ~ 
+@11 = ~Zimmer des Seemanns~
+@12 = ~Eis und Feuer Raum~
+@13 = ~Motor Raum~ 
+@14 = ~Unter dem Friedhof~
+@15 = ~Bodhis Lager~ 
+@16 = ~Harfner Feste~
+@17 = ~Eingang des Gildenhaus der Schattendiebe~
+@18 = ~Theater~
+@19 = ~Orden des strahlenden Herzens~ 
+@20 = ~Mekraths Unterschlupf~
+@21 = ~Lager des allsehenden Auges Kultes~ 
+@22 = ~Unterschlupf des allsehenden Auges~ 
+@23 = ~Vergessene Stadt~
+@24 = ~Tempel des vergessenen Gottes~ 
+@25 = ~Hof der de´Arnise Burg~
+@26 = ~Erdgeschoss der de´Arnise Burg~
+@27 = ~Obergeschoss der de´Arnise Burg~
+@28 = ~Hüte der Waldläufer~
+@29 = ~Amaunators Tempel~
+@30 = ~Unterschlupf des Schatten Drachens~
+@31 = ~Heimat von Garren Windspear~
+@32 = ~Firkraags Kerker~
+@33 = ~Eingang zu Firkraags Kerker~
+@34 = ~Firkraags Lager~
+@35 = ~Druidenhain~
+@36 = ~Bordell~
+@37 = ~Kuo-toas~
+@38 = ~Gedankenschinder~
+@39 = ~Betrachter~
+@40 = ~Ust Natha~
+@41 = ~Tempel von Lolth~
+@42 = ~Haus der hohen Priesterin~
+@43 = ~Elementar Ebene~
+@44 = ~Anfang des Irrgartens~
+@45 = ~Ende des Irrgartens~
+@46 = ~Vorletzte Ebene~
+@47 = ~Zweite Ebene von Yaga-Shuras Lager~
+@48 = ~Lycanths Laboratorium~
+@49 = ~Eingang zu Sendais Enklave~
+@50 = ~Wegkreuzung~
+@51 = ~Sendais innerstes Allerheiligste~
+@52 = ~Ihr könnt Euch von dieser Gegend nicht weck teleportieren.~
+@53 = ~Irgendetwas störrt Euren Versuch, Euch von dieser Gegend weck zu teleportieren.~
+@54 = ~Modifikation der NPCs und der Festenquests.~
+@55 = ~Teleportationsschriftrolle für BG2:SvA~
+@56 = ~Teleportationsschriftrolle für BG2:TdB~
+@57 = ~Diese Komponente benötigt TdB. Weil ihr TdB nicht installiert habt, werde ich diese Komponennte nicht installieren.~
